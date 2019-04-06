@@ -17,7 +17,7 @@
             <tr>
                 <th scope="row">{{ user_ingredient.id }}</th>
                 <td>{{ user_ingredient.ingredient }}</td>
-                <td>{{ user_ingredient.quantity }}</td>
+                <td>{{ user_ingredient.quantity }} {{ user_ingredient.ingredient.quantity_units }}</td>
             </tr>
             {% endfor %}
         </tbody>
