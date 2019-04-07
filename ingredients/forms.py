@@ -6,7 +6,7 @@ class UserIngredientForm(forms.ModelForm):
 
     class Meta:
         model = UserIngredient
-        fields = ('ingredient', 'quantity',)
+        fields = ('ingredient', 'quantity', 'exp_date')
 
 class IngredientForm(forms.ModelForm):
 

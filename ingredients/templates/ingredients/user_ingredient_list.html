@@ -11,6 +11,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Ingredient</th>
                 <th scope="col">Quantity</th>
+                <th scope="col">Expiration Date</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <th scope="row">{{ user_ingredient.id }}</th>
                 <td>{{ user_ingredient.ingredient }}</td>
                 <td>{{ user_ingredient.quantity }} {{ user_ingredient.ingredient.quantity_units }}</td>
+                <td>{{ user_ingredient.exp_date }}</td>
             </tr>
             {% endfor %}
         </tbody>
