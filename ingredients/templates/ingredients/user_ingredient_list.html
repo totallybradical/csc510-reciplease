@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Ingredient</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Expiration Date</th>
@@ -17,9 +16,8 @@
         <tbody>
             {% for user_ingredient in user_ingredients %}
             <tr>
-                <th scope="row">{{ user_ingredient.id }}</th>
-                <td>{{ user_ingredient.ingredient }}</td>
-                <td>{{ user_ingredient.quantity }} {{ user_ingredient.ingredient.quantity_units }}</td>
+                <td>{{ user_ingredient.ingredient__name }}</td>
+                <td>{{ user_ingredient.sumqty }} {{ user_ingredient.ingredient__quantity_units }}</td>
                 <td>{{ user_ingredient.exp_date }}</td>
             </tr>
             {% endfor %}
