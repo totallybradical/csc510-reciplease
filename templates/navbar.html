@@ -1,5 +1,8 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand d-flex w-50 mr-auto" href="{% url 'home' %}">reciplease</a>
+{% load staticfiles %}
+<nav class="navbar navbar-expand-md navbar-dark bg-success">
+    <a class="navbar-brand d-flex w-50 mr-auto" href="{% url 'home' %}">
+        <img src="{% static 'media/logo_white.png' %}" width="135" height="37" border="0">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,7 +13,7 @@
                 <a class="nav-link" href="{% url 'user_ingredient_list' %}">Ingredients</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="{% url 'expiring_user_ingredient_list' %}">Expiring</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>

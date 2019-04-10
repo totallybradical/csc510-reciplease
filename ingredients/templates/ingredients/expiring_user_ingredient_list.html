@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}My Expiring Ingredients{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 align="center">My Expiring Ingredients</h2>
+    <form align="center" >
+        Expiring on or before:
+        <input type="date" id="expiry_date" name="exp_date">
+        <button type="button" id="expiry_search" class="btn btn-default" style="background:none">
+            <span class="fas fa-search"></span>
+        </button>
+</form><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Edit</th>
+                <th scope="col">Ingredient</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Expiration Date</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody id="exp_table">
+            {% for user_ingredient in expiring_user_ingredients %}
+            <tr >
+                <th scope="row">
+                    <button type="button"  class="btn btn-default" style="background:none">
+                        <span class="far fa-edit"></span>
+                    </button>
+                </th>
+                <td>{{ user_ingredient.ingredient }}</td>
+                <td>{{ user_ingredient.quantity }} {{ user_ingredient.ingredient.quantity_units }}</td>
+                <td >{{ user_ingredient.exp_date }}</td>
+                <td >
+                    <button type="button"  class="btn btn-default" style="background:none">
+                        <span class="far fa-trash-alt"></span>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+        $(document).ready(function(){
+          $("#expiry_search").on("click", function() {
+            var exp_date_search = new Date($('#expiry_date').val());
+            $('#exp_table tr').filter(function() {
+              var date = new Date($(this)[0].cells[3].innerText);
+              //var newdate= (date.getMonth()) + '/' + date.getDay() + '/' +  date.getFullYear();
+              $(this).toggle(date <= exp_date_search);
+            });
+          });
+        });
+</script>
+{% endblock %}
