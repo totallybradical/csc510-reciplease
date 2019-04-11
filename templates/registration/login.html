@@ -5,14 +5,12 @@
 {% block content %}
 <div class="container" align="center">
     <h2>Login</h2>
-    <div class="container">
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-success m-1">Login</button>
-        </form>
-        <a href="{% url 'signup' %}" class="btn btn-info m-1">Register</a>
-    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success m-1">Login</button>
+    </form>
+    <a href="{% url 'signup' %}" class="btn btn-success m-1">Sign up</a>
 </div>
 <div class="container" align="center">
 </div>
