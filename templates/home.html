@@ -3,13 +3,15 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<h1 align="center">Welcome to <img src="../static/media/logo_black.png" width="225"></h1>
 {% if user.is_authenticated %}
-<h1>
-    Hi {{ user.username }}!
+<h1 align="center">
+    Hello {{ user.username }}!<br>
+    <h2 align="center">What do you feel like cooking today?</h2>
 </h1>
 {% else %}
-<h1>
-    You are not logged in
+<h1 align="center">
+    Please log in
 </h1>
 {% endif %}
 {% endblock %}
