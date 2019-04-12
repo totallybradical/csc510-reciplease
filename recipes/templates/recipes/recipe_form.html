@@ -3,9 +3,11 @@
 {% block title %}Add Recipe{% endblock %}
 
 {% block content %}
-<h2>Add Recipe</h2>
-<form method="POST" class="post-form">{% csrf_token %}
+<h2 align="center">Add Recipe</h2>
+<form method="POST" class="post-form" align="center">{% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="save btn btn-primary">Save</button>
+    <button type="submit" class="save btn btn-default" style="background:none">
+            <span class="far fa-save fa-3x"></span>
+    </button>
 </form>
 {% endblock %}
