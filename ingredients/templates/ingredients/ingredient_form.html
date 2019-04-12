@@ -3,8 +3,8 @@
 {% block title %}Add Ingredient Type{% endblock %}
 
 {% block content %}
-<h2>Add Ingredient Type</h2>
-<form method="POST" class="post-form">{% csrf_token %}
+<h2 align="center">Add New Ingredient Type</h2>
+<form align="center" method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="save btn btn-success">Save</button>
 </form>
