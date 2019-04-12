@@ -3,10 +3,29 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<h2>Sign up</h2>
-<form method="post">
+<div class="container" align="center">
+    <h2>Sign up</h2>
+    <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-</form>
+
+    {% for field in form.visible_fields %}
+    <div class="row">
+        <div class="col"><span class="float-right">{{ field.label_tag }}</span></div>
+        <div class="col"><span class="float-left">{{ field }}</float-left></div>
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Sign up</button>
+    </form>
+
+    <div class="m-3">
+        {% for field in form.visible_fields %}
+        {% for error in field.errors %}
+        <div class="alert alert-danger">
+            <string>{{ error|escape }}</strong>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

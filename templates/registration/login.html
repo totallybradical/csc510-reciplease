@@ -7,7 +7,12 @@
     <h2>Login</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form.visible_fields %}
+        <div class="row">
+            <div class="col"><span class="float-right">{{ field.label_tag }}</span></div>
+            <div class="col"><span class="float-left">{{ field }}</float-left></div>
+        </div>
+        {% endfor %}
         <button type="submit" class="btn btn-success m-1">Login</button>
     </form>
     <a href="{% url 'signup' %}" class="btn btn-success m-1">Sign up</a>
