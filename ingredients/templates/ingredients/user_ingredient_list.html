@@ -10,7 +10,6 @@
             <tr>
                 <th scope="col">Ingredient</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Expiration Date</th>
             </tr>
         </thead>
         <tbody>
@@ -18,13 +17,12 @@
             <tr>
                 <td>{{ user_ingredient.ingredient__name }}</td>
                 <td>{{ user_ingredient.sumqty }} {{ user_ingredient.ingredient__quantity_units }}</td>
-                <td>{{ user_ingredient.exp_date }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-<div class="container">
+<div class="container" align="center">
     <a class="btn btn-success" href="{% url 'add_user_ingredient' %}" role="button">Add</a>
 </div>
 {% endblock %}
