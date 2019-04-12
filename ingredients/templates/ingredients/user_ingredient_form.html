@@ -3,12 +3,12 @@
 {% block title %}Add Ingredient{% endblock %}
 
 {% block content %}
-<h2>Add Ingredient</h2>
-<form method="POST" class="post-form">{% csrf_token %}
+<h2 align="center">Add Ingredient</h2>
+<form method="POST" align="center" class="post-form">{% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="save btn btn-primary">Save</button>
-</form>
-<div class="container">
-    <a class="btn btn-success" align="center" href="{% url 'add_ingredient_type' %}" role="button">Add Ingredient Type</a>
+    <button type="submit"  class="save btn btn-success">Save</button>
+</form><br>
+<div class="container" align="center">
+    <a  href="{% url 'add_ingredient_type' %}" >Add New Ingredient Type</a>
 </div>
 {% endblock %}
