@@ -7,7 +7,7 @@ from .models import Ingredient, UserIngredient
 from .forms import IngredientForm, UserIngredientForm
 
 def ingredient_list(request):
-    user_ingredients = UserIngredient.objects.filter(user=1).select_related('ingredient').values('ingredient', 'ingredient__name', 'exp_date', 'ingredient__quantity_units').annotate(sumqty=Sum('quantity')).order_by('ingredient', '-exp_date')
+    user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').values('ingredient', 'ingredient__name', 'exp_date', 'ingredient__quantity_units').annotate(sumqty=Sum('quantity')).order_by('ingredient', '-exp_date')
     return render(request, 'ingredients/user_ingredient_list.html', {'user_ingredients': user_ingredients})
 
 def add_user_ingredient(request):
@@ -15,7 +15,7 @@ def add_user_ingredient(request):
     return render(request, 'ingredients/user_ingredient_list.html', {'user_ingredients': user_ingredients})
 
 def expiring_ingredients(request):
-    expiring_user_ingredients = UserIngredient.objects.filter(user=request.user,).select_related('ingredient').order_by('exp_date') # Get all ingredients for this user
+    expiring_user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').order_by('exp_date') # Get all ingredients for this user
     return render(request, 'ingredients/expiring_user_ingredient_list.html', {'expiring_user_ingredients': expiring_user_ingredients})
 
 def add_user_ingredient(request):
