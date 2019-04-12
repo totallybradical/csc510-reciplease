@@ -11,7 +11,7 @@
     {% for field in form.visible_fields %}
     <div class="row">
         <div class="col"><span class="float-right">{{ field.label_tag }}</span></div>
-        <div class="col"><span class="float-left">{{ field }}</float-left></div>
+        <div class="col"><span class="float-left">{{ field }}</span></div>
     </div>
     {% endfor %}
 
@@ -22,10 +22,11 @@
         {% for field in form.visible_fields %}
         {% for error in field.errors %}
         <div class="alert alert-danger">
-            <string>{{ error|escape }}</strong>
+            {{ error|escape }}
         </div>
         {% endfor %}
         {% endfor %}
     </div>
+
 </div>
 {% endblock %}

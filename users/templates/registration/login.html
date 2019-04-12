@@ -16,7 +16,11 @@
         <button type="submit" class="btn btn-success m-1">Login</button>
     </form>
     <a href="{% url 'signup' %}" class="btn btn-success m-1">Sign up</a>
-</div>
-<div class="container" align="center">
+
+    {% if form.errors %}
+    <div class="m-3 alert alert-danger">
+        Username/password combination is incorrect.
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
