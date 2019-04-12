@@ -28,12 +28,12 @@
                 <th scope="row">
                     <button type="button"  class="btn btn-default" style="background:none">
                         <span class="far fa-edit"></span>
-                    </button>
+                    </button>                
                 </th>
                 <td>{{ user_ingredient.ingredient }}</td>
                 <td>{{ user_ingredient.quantity }} {{ user_ingredient.ingredient.quantity_units }}</td>
-                <td >{{ user_ingredient.exp_date }}</td>
-                <td >
+                <td>{{ user_ingredient.exp_date }}</td>
+                <td>
                     <button type="button"  class="btn btn-default" style="background:none">
                         <span class="far fa-trash-alt"></span>
                     </button>
@@ -47,10 +47,14 @@
 <script>
         $(document).ready(function(){
           $("#expiry_search").on("click", function() {
+            //date from box
             var exp_date_search = new Date($('#expiry_date').val());
+            exp_date_search.setHours(0,0,0,0);
+            exp_date_search.setDate(exp_date_search.getDate() + 1);
             $('#exp_table tr').filter(function() {
+              //date from row
               var date = new Date($(this)[0].cells[3].innerText);
-              //var newdate= (date.getMonth()) + '/' + date.getDay() + '/' +  date.getFullYear();
+              date.setHours(0,0,0,0);
               $(this).toggle(date <= exp_date_search);
             });
           });
