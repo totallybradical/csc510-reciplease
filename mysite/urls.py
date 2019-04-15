@@ -23,5 +23,6 @@ urlpatterns = [
     path('users/', include('django.contrib.auth.urls')),
     path('ingredients/', include('ingredients.urls')),
     path('recipes/', include('recipes.urls')),
+    path('recommender/', include('recommender.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 ]
