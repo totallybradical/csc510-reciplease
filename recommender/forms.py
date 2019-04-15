@@ -3,7 +3,6 @@ from .models import SearchModel
 
 
 class SearchForm(forms.ModelForm):
-
     class Meta:
         model = SearchModel
-        fields = ('mealType', 'mealStyle', 'askANeighbor')
+        fields = '__all__'
