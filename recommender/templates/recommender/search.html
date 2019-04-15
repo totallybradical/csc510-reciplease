@@ -4,8 +4,24 @@
 
 {% block content %}
 <h2>Search for a Recipe</h2>
-<form method="GET" class="get-form">{% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" class="submit btn btn-primary">Search!</button>
+<form align="center">
+    <input type="checkbox" id="AskANeighbor" name="AskANeighbor"> Ask A Neighbor
+    <select name="Meal Type">
+        <option value="BRFST">Breakfast</option>
+        <option value="LNCH">Lunch</option>
+        <option value="DNR">Dinner</option>
+    </select>
+    <select name="Meal Style">
+        <option value="IT">Italian</option>
+        <option value="AM">American</option>
+        <option value="AS">Asian</option>
+        <option value="FR">French</option>
+    </select>
+    <select name="Ingredients" size="10" multiple>
+        <option value="milk">Milk</option>
+        <option value="pasta">Pasta</option>
+        <option value="eggs">Eggs</option>
+    </select>
+    <input type="submit">
 </form>
 {% endblock %}
