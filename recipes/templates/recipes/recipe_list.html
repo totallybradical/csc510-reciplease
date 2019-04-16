@@ -3,9 +3,18 @@
 {% block title %}Recipes{% endblock %}
 
 {% block content %}
+
+{% load static %}
+<script src="{% static "js/filter.js" %}"></script>
+
 <div class="container">
     <h2 align="center">Recipes</h2>
-    <table class="table">
+
+    <div align="center">
+        <input id="filter-input" placeholder="Filter" />
+    </div>
+
+    <table class="table header-fixed">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -16,9 +25,9 @@
                 <th scope="col">Yield (servings)</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="recipe-table-body">
             {% for recipe in recipes %}
-            <tr>
+            <tr class="recipe-table-row">
                 <th scope="row">{{ recipe.id }}</th>
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.category }}</td>
