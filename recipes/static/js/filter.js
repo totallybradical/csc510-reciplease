@@ -16,31 +16,15 @@ function handleInput(event) {
     dbgPrint(`recipeTableBody: ${recipeTableBody}`);
     dbgPrint(`recipeTableBody.rows: ${recipeTableBody.rows}`);
 
-    let newRows = []
-    for (let i = 0; i < recipeTableBodyRows.length; i++) {
-        let keep = false;
-        let row = recipeTableBodyRows[i];
-        dbgPrint(`row ${i}: ${row}`);
-        for (let j = 0; j < row.cells.length; j++) {
-            let col = row.cells[j];
-            dbgPrint(`col ${j}: ${col}`);
-            if (col.textContent.includes(filterInput.value)) {
-                keep = true;
-                break;
-            }
-        }
-
-        if (keep) {
-            newRows.push(row);
-        }
-    }
-
     while (recipeTableBody.firstChild) {
         recipeTableBody.removeChild(recipeTableBody.firstChild);
     }
-    for (let i = 0; i < newRows.length; i++) {
-        recipeTableBody.appendChild(newRows[i]);
-    }
+
+    recipeTableBodyRows.filter((row) => {
+        return Array.from(row.cells).some((col) => {
+            return col.textContent.includes(filterInput.value);
+        })
+    }).forEach((row) => recipeTableBody.appendChild(row));
 }
 
 window.onload = function() {
