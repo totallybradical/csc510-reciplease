@@ -32,13 +32,8 @@ window.onload = function() {
 
     recipeTableBody = document.getElementById('recipe-table-body');
     dbgPrint('recipeTableBody:' + recipeTableBody);
-    recipeTableBodyRows = []
-    for (let i = 0; i < recipeTableBody.rows.length; i++) {
-        let keep = false;
-        let row = recipeTableBody.rows[i];
-        dbgPrint(`row ${i}: ${row}`);
-        recipeTableBodyRows.push(row);
-    }
+    recipeTableBodyRows = Array.from(recipeTableBody.rows);
+    dbgPrint('recipeTableBodyRows:' + recipeTableBodyRows);
 
     filterInput = document.getElementById('filter-input');
     dbgPrint('filterInput: ' + filterInput);
