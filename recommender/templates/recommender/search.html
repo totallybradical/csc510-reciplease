@@ -4,24 +4,10 @@
 
 {% block content %}
 <h2>Search for a Recipe</h2>
-<form align="center">
-    <input type="checkbox" id="AskANeighbor" name="AskANeighbor"> Ask A Neighbor
-    <select name="Meal Type">
-        <option value="BRFST">Breakfast</option>
-        <option value="LNCH">Lunch</option>
-        <option value="DNR">Dinner</option>
-    </select>
-    <select name="Meal Style">
-        <option value="IT">Italian</option>
-        <option value="AM">American</option>
-        <option value="AS">Asian</option>
-        <option value="FR">French</option>
-    </select>
-    <select name="Ingredients" size="10" multiple>
-        <option value="milk">Milk</option>
-        <option value="pasta">Pasta</option>
-        <option value="eggs">Eggs</option>
-    </select>
-    <input type="submit">
+<form method="" class="" align="center">{% csrf_token %}
+    <table>{{ form.as_table}}</table>
+    <button type="submit" class="save btn btn-default" style="background:none">TEST</button>
 </form>
+
+
 {% endblock %}
