@@ -61,6 +61,8 @@ class TestRecommender(unittest.TestCase):
         recommended_recipes = recommender.recommend_recipe(user_ingredient_list, recipes)
         self.assertEqual(len(recommended_recipes), 1)
         self.assertEqual(recommended_recipes[0].name, 'pass_recipe')
+        recipes.append(Recipe('pass2', list([RecipeIngredient(pepper, 1), RecipeIngredient(salt, 4)])))
+        print(recommender.recommend_recipe(user_ingredient_list, recipes, feeling_lucky=True).name)
 
 
 if __name__ == '__main__':
