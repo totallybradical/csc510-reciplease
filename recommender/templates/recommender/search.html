@@ -3,8 +3,8 @@
 {% block title %}Search{% endblock %}
 
 {% block content %}
-<h2>Search for a Recipe</h2>
-<form method="post" align="center">
+<div class="container" align="center">
+    <h2>Search for a Recipe</h2>
     <form method="post">
         {% csrf_token %}
         {% for field in form.visible_fields %}
@@ -13,7 +13,8 @@
             <div class="col"><span class="float-left">{{ field }}</float-left></div>
         </div>
         {% endfor %}
-        <button type="submit" class="btn btn-success m-1">Recommend</button>
+        <button type="submit" name="recommend" class="btn btn-success m-1">Recommend</button>
+        <button type="submit" name="lucky" class="fas fa-dice btn btn-success m-1">I'm Feeling Lucky</button>
     </form>
 
     <div class="m-3">
@@ -25,7 +26,5 @@
         {% endfor %}
         {% endfor %}
     </div>
-</form>
-
-
+</div>
 {% endblock %}
