@@ -22,7 +22,9 @@ function handleInput(event) {
 
     recipeTableBodyRows.filter((row) => {
         return Array.from(row.cells).some((col) => {
-            return col.textContent.includes(filterInput.value);
+            return col.textContent.toLowerCase().includes(
+                filterInput.value.toLowerCase()
+            );
         })
     }).forEach((row) => recipeTableBody.appendChild(row));
 }
