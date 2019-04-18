@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 
 # Create your views here.
 from django.shortcuts import redirect
@@ -18,7 +17,7 @@ def delete_user_ingredient(request, id=None):
     if request.method == "POST" and request.user.is_authenticated and request.user == creator:
         user_ingredient.delete()
         messages.success(request, "Ingredient successfully deleted!")
-        return HttpResponseRedirect("ingredients/expiring_user_ingredient_list.html")
+        return redirect('expiring_user_ingredient_list')
     
     context= {'user_ingredient': user_ingredient,
               'creator': creator,
