@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.shortcuts import redirect
@@ -19,3 +19,9 @@ def add_recipe(request):
     else:
         form = RecipeForm()
     return render(request, 'recipes/recipe_form.html', {'form': form})
+
+def recipe_detail(request, id=None):
+    recipe= get_object_or_404(Recipe, id=id)
+    context={'recipe': recipe,
+            }
+    return render(request, 'recipes/recipe_detail.html', context)

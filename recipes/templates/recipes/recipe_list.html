@@ -22,6 +22,7 @@
                 <th scope="col">Prep Time (mins)</th>
                 <th scope="col">Cook Time (mins)</th>
                 <th scope="col">Yield (servings)</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
         <tbody id="recipe-table-body">
@@ -32,6 +33,12 @@
                 <td>{{ recipe.prep_time }}</td>
                 <td>{{ recipe.cook_time }}</td> 
                 <td>{{ recipe.servings }}</td>
+                <td>
+                    <button type="button"  class="btn btn-default" style="background:none">
+                        <a href="/recipes/{{ recipe.id }}"><span class="fas fa-info-circle" style="color:#000000;"></span></a>
+                    </button>
+        
+                </td>
             </tr>
             {% endfor %}
         </tbody>
