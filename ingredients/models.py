@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta
+from django.core.validators import MinValueValidator
 
 def one_month_from_today():
     return timezone.now() + timedelta(days=30)
@@ -23,7 +24,7 @@ class Ingredient(models.Model):
 class UserIngredient(models.Model):
     ingredient = models.ForeignKey('Ingredient', on_delete=models.SET_NULL, null=True)
     user =  models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+    quantity = models.DecimalField(max_digits=7, decimal_places=2, validators=[MinValueValidator(0)])
     exp_date = models.DateField(default=one_month_from_today, blank=True, null=True)
     
     def __str__(self):

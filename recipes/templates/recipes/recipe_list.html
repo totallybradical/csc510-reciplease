@@ -17,7 +17,6 @@
     <table class="table header-fixed">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Category</th>
                 <th scope="col">Prep Time (mins)</th>
@@ -28,11 +27,10 @@
         <tbody id="recipe-table-body">
             {% for recipe in recipes %}
             <tr class="recipe-table-row">
-                <th scope="row">{{ recipe.id }}</th>
-                <td>{{ recipe.name }}</td>
+                <th scope="row">{{ recipe.name }}</th>
                 <td>{{ recipe.category }}</td>
                 <td>{{ recipe.prep_time }}</td>
-                <td>{{ recipe.cook_time }}</td>
+                <td>{{ recipe.cook_time }}</td> 
                 <td>{{ recipe.servings }}</td>
             </tr>
             {% endfor %}

@@ -16,7 +16,7 @@ class RecipeCategory(models.Model):
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey('Recipe', on_delete=models.SET_NULL, null=True)
     ingredient = models.ForeignKey('ingredients.Ingredient', on_delete=models.SET_NULL, null=True)
-    quantity = models.IntegerField(validators=[MinValueValidator(1)])
+    quantity = models.DecimalField(max_digits=7, decimal_places=2, validators=[MinValueValidator(0)])
 
     def __str__(self):
         return (self.recipe.name + ': ' + self.ingredient.name)
