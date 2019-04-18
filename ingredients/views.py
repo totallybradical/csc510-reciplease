@@ -18,7 +18,7 @@ def delete_user_ingredient(request, id=None):
     if request.method == "POST" and request.user.is_authenticated and request.user == creator:
         user_ingredient.delete()
         messages.success(request, "Ingredient successfully deleted!")
-        return HttpResponseRedirect("ingredients/list")
+        return HttpResponseRedirect("ingredients/expiring_user_ingredient_list.html")
     
     context= {'user_ingredient': user_ingredient,
               'creator': creator,
