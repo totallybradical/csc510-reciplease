@@ -4,9 +4,27 @@
 
 {% block content %}
 <h2>Search for a Recipe</h2>
-<form method="" class="" align="center">{% csrf_token %}
-    <table>{{ form.as_table}}</table>
-    <button type="submit" class="save btn btn-default" style="background:none">TEST</button>
+<form method="post" align="center">
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+        <div class="row">
+            <div class="col"><span class="float-right">{{ field.label_tag }}</span></div>
+            <div class="col"><span class="float-left">{{ field }}</float-left></div>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success m-1">Recommend</button>
+    </form>
+
+    <div class="m-3">
+        {% for field in form.visible_fields %}
+        {% for error in field.errors %}
+        <div class="alert alert-danger">
+            {{ error|escape }}
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
 </form>
 
 
