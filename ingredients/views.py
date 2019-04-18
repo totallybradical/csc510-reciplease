@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 from django.shortcuts import redirect
@@ -10,10 +12,19 @@ def ingredient_list(request):
     user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').values('ingredient', 'ingredient__name', 'exp_date', 'ingredient__quantity_units').annotate(sumqty=Sum('quantity')).order_by('ingredient', '-exp_date')
     return render(request, 'ingredients/user_ingredient_list.html', {'user_ingredients': user_ingredients})
 
-def delete_user_ingredient(request, u_ingredient_id =None):
-    object = UserIngredient.objects.get(id=u_ingredient_id)
-    object.delete()
-    return render(request, 'ingredients/user_ingredient_list.html', {'user_ingredients': user_ingredients})
+def delete_user_ingredient(request, id=None):
+    user_ingredient = get_object_or_404(UserIngredient, id=id)
+    creator = user_ingredient.user
+    if request.method == "POST" and request.user.is_authenticated and request.user == creator:
+        user_ingredient.delete()
+        messages.success(request, "Ingredient successfully deleted!")
+        return HttpResponseRedirect("ingredients/list")
+    
+    context= {'user_ingredient': user_ingredient,
+              'creator': creator,
+              }
+    
+    return render(request, 'ingredients/delete_user_ingredient.html', context)    
 
 def expiring_ingredients(request):
     expiring_user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').order_by('exp_date') # Get all ingredients for this user
