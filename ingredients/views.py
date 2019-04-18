@@ -10,8 +10,9 @@ def ingredient_list(request):
     user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').values('ingredient', 'ingredient__name', 'exp_date', 'ingredient__quantity_units').annotate(sumqty=Sum('quantity')).order_by('ingredient', '-exp_date')
     return render(request, 'ingredients/user_ingredient_list.html', {'user_ingredients': user_ingredients})
 
-def add_user_ingredient(request):
-
+def delete_user_ingredient(request, u_ingredient_id =None):
+    object = UserIngredient.objects.get(id=u_ingredient_id)
+    object.delete()
     return render(request, 'ingredients/user_ingredient_list.html', {'user_ingredients': user_ingredients})
 
 def expiring_ingredients(request):
