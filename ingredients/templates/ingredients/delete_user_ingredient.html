@@ -6,18 +6,18 @@
 
 {%if request.user.is_authenticated and request.user == creator %}
 
-<h2 align="center">Delete {{ user_ingredient.Ingredient }}?</h2>
+<h2 align="center">Delete {{ user_ingredient.ingredient }}?</h2><br>
 
-<form method="POST" action="">
+<form method="POST" action="" align="center">
 {% csrf_token %}
 Are you sure you want to delete this ingredient? 
 <input type="submit" value="Yes"/>
-<a href="/ingredients/{{ user_ingredient.id }}/">Cancel </a>
+<a href="expiring_user_ingredient_list">Cancel </a>
 </form>
 {% endif %}
 
 {%if request.user != creator %}
-<h1>You cannot delete this entry</h1>
+<h1 align="center">You cannot delete this entry</h1>
 {% endif %}
 
 

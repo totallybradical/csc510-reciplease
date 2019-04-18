@@ -25,10 +25,8 @@
         {% endif %}
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
             {% if user.is_authenticated %}
-            <li class="nav-item" style="color:#FFFFFF; border:none">
-                Hi {{ user.username }}!
-            </li>
-            <li class="nav-item">
+            <li class="nav-item"  >
+                <span style="color:#FFFFFF">Hi {{ user.username }}!</span>
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
             {% else %}
