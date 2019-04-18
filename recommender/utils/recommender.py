@@ -1,8 +1,13 @@
-def recommend_recipe(user_ingredient_list, recipe_list, ask_a_neighbor=False):
+import random
+
+
+def recommend_recipe(user_ingredient_list, recipe_list, ask_a_neighbor=False, feeling_lucky=False):
     recommended_recipes = []
     for recipe in recipe_list:
         if ingredients_available(recipe, user_ingredient_list, ask_a_neighbor):
             recommended_recipes.append(recipe)
+    if feeling_lucky:
+        return random.choice(recommended_recipes)
     return recommended_recipes
 
 
