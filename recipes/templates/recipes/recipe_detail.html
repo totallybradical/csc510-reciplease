@@ -20,7 +20,12 @@
         <tbody id="recipe-table-body">
             {% for ingredient in recipe.ingredients.all %}
             <tr class="recipe-table-row">
-                <th scope="row">{{ ingredient.RecipeIngredient.quantity }} {{ ingredient.quantity_units }}</th>
+                <th scope="row">
+                {% for ri in ingredient.recipeingredient_set.all %}
+                    {% if ri.recipe == recipe %}
+                        {{ ri.quantity }} {{ ingredient.quantity_units }}
+                    {% endif %}
+                {% endfor %} </th>
                 <td>{{ ingredient.name }}</td>
             </tr>
             {% endfor %}

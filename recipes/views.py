@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.shortcuts import redirect
-from .models import Recipe, RecipeCategory
+from .models import Recipe, RecipeCategory, RecipeIngredient
 from .forms import RecipeForm
 
 def recipe_list(request):
@@ -22,6 +22,4 @@ def add_recipe(request):
 
 def recipe_detail(request, id=None):
     recipe= get_object_or_404(Recipe, id=id)
-    context={'recipe': recipe,
-            }
-    return render(request, 'recipes/recipe_detail.html', context)
+    return render(request, 'recipes/recipe_detail.html', {'recipe': recipe})
