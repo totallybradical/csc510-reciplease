@@ -42,6 +42,7 @@ def add_user_ingredient(request):
     return render(request, 'ingredients/user_ingredient_form.html', {'form': form})
 
 def edit_user_ingredient(request, id=None):
+    user_ingredient = get_object_or_404(UserIngredient, id=id)
     creator = user_ingredient.user
     if request.method == "POST" and request.user.is_authenticated and request.user == creator:
         form = EditUserIngredientForm(request.POST)
