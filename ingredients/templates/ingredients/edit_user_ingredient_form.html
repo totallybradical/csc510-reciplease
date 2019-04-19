@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Ingredient{% endblock %}
+
+{% block content %}
+<h2 align="center">Edit Ingredient</h2>
+<p align="center">{{ ingredient }}</p>
+<form method="POST" align="center" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit"  class="save btn btn-success">Save</button>
+</form><br>
+<div class="container" align="center">
+    <a  href="{% url 'add_ingredient_type' %}" class="fas fa-plus"> Ingredient Type</a>
+</div>
+{% endblock %}

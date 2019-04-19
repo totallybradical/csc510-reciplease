@@ -13,3 +13,9 @@ class IngredientForm(forms.ModelForm):
     class Meta:
         model = Ingredient
         fields = ('name', 'quantity_units',)
+
+class EditUserIngredientForm(forms.ModelForm):
+
+    class Meta:
+        model = UserIngredient
+        fields = ('quantity', 'exp_date')

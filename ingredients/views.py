@@ -41,6 +41,19 @@ def add_user_ingredient(request):
         form = UserIngredientForm()
     return render(request, 'ingredients/user_ingredient_form.html', {'form': form})
 
+def edit_user_ingredient(request, id=None):
+    creator = user_ingredient.user
+    if request.method == "POST" and request.user.is_authenticated and request.user == creator:
+        form = EditUserIngredientForm(request.POST)
+        if form.is_valid():
+            user_ingredient = form.save(commit=False)
+            user_ingredient.user = request.user
+            user_ingredient.save()
+            return redirect('user_ingredient_list')
+
+    return render(request, 'ingredients/edit_user_ingredient_form.html', {'form': form})
+
+
 def add_ingredient_type(request):
     if request.method == "POST":
         form = IngredientForm(request.POST)
