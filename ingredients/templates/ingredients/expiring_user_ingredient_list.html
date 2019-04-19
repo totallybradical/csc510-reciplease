@@ -24,18 +24,18 @@
         </thead>
         <tbody id="exp_table">
             {% for user_ingredient in expiring_user_ingredients %}
-            <tr >
-                <th scope="row">
+            <tr>
+                <td>
                     <button type="button"  class="btn btn-default" style="background:none">
-                        <a href="/ingredients/{{ user_ingredient.id }}/edit/"></a><span class="far fa-edit" style="color:#000000;"></span></a>
+                        <a href="/ingredients/{{ user_ingredient.id }}/edit/"><span class="far fa-edit" style="color:#000000;"></span></a>
                     </button>                
-                </th>
+                </td>
                 <td>{{ user_ingredient.ingredient }}</td>
                 <td>{{ user_ingredient.quantity }} {{ user_ingredient.ingredient.quantity_units }}</td>
                 <td>{{ user_ingredient.exp_date }}</td>
                 <td>
                     <button type="button"  class="btn btn-default" style="background:none">
-                        <a href="/ingredients/{{ user_ingredient.id }}/delete/"><span class="far fa-trash-alt" style="color:#000000;"></span> </a>
+                        <a href="/ingredients/{{ user_ingredient.id }}/delete/"><span class="far fa-trash-alt" style="color:#000000;"></span></a>
                     </button>
                 </td>
             </tr>

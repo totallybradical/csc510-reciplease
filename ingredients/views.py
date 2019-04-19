@@ -25,6 +25,20 @@ def delete_user_ingredient(request, id=None):
     
     return render(request, 'ingredients/delete_user_ingredient.html', context)    
 
+def edit_user_ingredient(request, id=None):
+    user_ingredient = get_object_or_404(UserIngredient, id=id)
+    creator = user_ingredient.user
+    if request.method == "POST" and request.user.is_authenticated and request.user == creator:
+        form = UserIngredientForm(request.POST, instance=user_ingredient)
+        if form.is_valid():
+            user_ingredient = form.save(commit=False)
+            user_ingredient.user = request.user
+            user_ingredient.save()
+            return redirect('user_ingredient_list')
+    else:
+        form = UserIngredientForm(instance=user_ingredient)
+    return render(request, 'ingredients/user_ingredient_form.html', {'form': form})
+
 def expiring_ingredients(request):
     expiring_user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').order_by('exp_date') # Get all ingredients for this user
     return render(request, 'ingredients/expiring_user_ingredient_list.html', {'expiring_user_ingredients': expiring_user_ingredients})
@@ -40,19 +54,6 @@ def add_user_ingredient(request):
     else:
         form = UserIngredientForm()
     return render(request, 'ingredients/user_ingredient_form.html', {'form': form})
-
-def edit_user_ingredient(request, id=None):
-    user_ingredient = get_object_or_404(UserIngredient, id=id)
-    creator = user_ingredient.user
-    if request.method == "POST" and request.user.is_authenticated and request.user == creator:
-        form = EditUserIngredientForm(request.POST)
-        if form.is_valid():
-            user_ingredient = form.save(commit=False)
-            user_ingredient.user = request.user
-            user_ingredient.save()
-            return redirect('user_ingredient_list')
-
-    return render(request, 'ingredients/edit_user_ingredient_form.html', {'form': form})
 
 
 def add_ingredient_type(request):
