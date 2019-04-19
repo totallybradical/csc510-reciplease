@@ -1,36 +1,33 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Recipe{% endblock %}
+{% block title %}View Recipe{% endblock %}
 
 {% block content %}
+<div class="container">
 
-<h2 align="center">{{ recipe.name }}</h2>
-<p align="center">Category: {{ recipe.category }}</p>
-<p align="center">Prep time: {{ recipe.prep_time }} Cook time: {{ recipe.cook_time }}</p>
+    <h2 align="center">{{ recipe.name }}</h2>
+    <p align="center">Category: {{ recipe.category }}</p>
+    <p align="center">Prep time: {{ recipe.prep_time }} Cook time: {{ recipe.cook_time }}</p>
 
-<p align="center">Ingredients: </p>
-<table class="table header-fixed" align="center">
-    <thead>
-        <tr>
-            <th scope="col">           </th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Ingredient</th>            
-            <th scope="col">           </th>
-        </tr>
-    </thead>
-    <tbody id="recipe-ingredient-list">
-        {% for ingredient in recipe.ingredients.all %}
-        <tr class="recipe-table-row">
-            <th scope="row">            </th>
-            <td>{{ ingredient.quantity }} {{ ingredient.ingredient__quantity_units }}</td>
-            <td>{{ ingredient.ingredient }}</td>
-            <td>            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<p align="center">{{ recipe.description }}</p>
+    <p align="center">Ingredients: </p>
+    <table class="table header-fixed" align="center">
+        <thead>
+            <tr>
+                <th scope="col">Quantity</th>
+                <th scope="col">Ingredient</th>            
+            </tr>
+        </thead>
+        <tbody id="recipe-table-body">
+            {% for ingredient in recipe.ingredients.all %}
+            <tr class="recipe-table-row">
+                <th scope="row">{{ ingredient.quantity }} {{ ingredient.quantity_units }}</th>
+                <td>{{ ingredient.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p align="center">{{ recipe.description }}</p>
 
-<p align="center"><a href="{% url 'recipe_list' %}" <span class="fas fa-arrow-alt-circle-left fa-2x" style="color:#000000;"></span></a></p>
-
+    <p align="center"><a href="{% url 'recipe_list' %}" <span class="fas fa-arrow-alt-circle-left fa-2x" style="color:#000000;"></span></a></p>
+</div>
 {% endblock %}
