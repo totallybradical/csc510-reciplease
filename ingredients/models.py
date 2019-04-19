@@ -14,6 +14,9 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=200)
     quantity_units = models.CharField(max_length=200) # Type of units for ingredient (oz, lbs, units, etc)
 
+    class Meta:
+        ordering = ['name']
+
     def add(self):
         self.save()
 

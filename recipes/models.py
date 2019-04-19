@@ -8,6 +8,9 @@ from ingredients.models import Ingredient
 # Basic model for a recipe category
 class RecipeCategory(models.Model):
     name = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ['name']
     
     def __str__(self):
         return self.name
