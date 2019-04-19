@@ -8,6 +8,7 @@
 <form method="POST" align="center" class="post-form">{% csrf_token %}
     {{ form.as_p }}
     <button type="submit"  class="save btn btn-success">Save</button>
+    <a href="{% url 'expiring_user_ingredient_list' %}" <span>Cancel</span></a>
 </form><br>
 <div class="container" align="center">
     <a  href="{% url 'add_ingredient_type' %}" class="fas fa-plus"> Ingredient Type</a>

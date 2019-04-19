@@ -11,7 +11,7 @@
 <form method="POST" action="" align="center">
 {% csrf_token %}
 Are you sure you want to delete this ingredient? 
-<input type="submit" value="Yes"/>
+<button type="submit"  value="Yes" class="save btn btn-success">Yes</button>
 <a href="{% url 'expiring_user_ingredient_list' %}" <span>Cancel</span></a>
 </form>
 {% endif %}
