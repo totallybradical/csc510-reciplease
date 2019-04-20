@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2 align="center">Edit Ingredient</h2>
-<h3 align="center">{{ user_ingredient.ingredient }}</h3>
+<h3 align="center"> {{ user_ingredient.ingredient }} </h3>
 <form method="POST" align="center" class="post-form">{% csrf_token %}
     {{ form.as_p }}
     <button type="submit" value="Yes" class="save btn btn-success">Save</button><br>
