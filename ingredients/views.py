@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.db.models import Sum
 from .models import Ingredient, UserIngredient
-from .forms import IngredientForm, UserIngredientForm
+from .forms import IngredientForm, UserIngredientForm, EditUserIngredientForm
 
 def ingredient_list(request):
     user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').values('ingredient', 'ingredient__name', 'exp_date', 'ingredient__quantity_units').annotate(sumqty=Sum('quantity')).order_by('ingredient', '-exp_date')
@@ -29,15 +29,15 @@ def edit_user_ingredient(request, id=None):
     user_ingredient = get_object_or_404(UserIngredient, id=id)
     creator = user_ingredient.user
     if request.method == "POST" and request.user.is_authenticated and request.user == creator:
-        form = UserIngredientForm(request.POST, instance=user_ingredient)
+        form = EditUserIngredientForm(request.POST, instance=user_ingredient)
         if form.is_valid():
             user_ingredient = form.save(commit=False)
             user_ingredient.user = request.user
             user_ingredient.save()
-            return redirect('user_ingredient_list')
+            return redirect('expiring_user_ingredient_list')
     else:
-        form = UserIngredientForm(instance=user_ingredient)
-    return render(request, 'ingredients/user_ingredient_form.html', {'form': form})
+        form = EditUserIngredientForm(instance=user_ingredient)
+    return render(request, 'ingredients/edit_user_ingredient_form.html', {'form': form, 'user_ingredient': user_ingredient})
 
 def expiring_ingredients(request):
     expiring_user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').order_by('exp_date') # Get all ingredients for this user

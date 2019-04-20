@@ -4,10 +4,10 @@
 
 {% block content %}
 <h2 align="center">Edit Ingredient</h2>
-<p align="center">{{ ingredient }}</p>
+<h3 align="center">{{ user_ingredient.ingredient }}</h3>
 <form method="POST" align="center" class="post-form">{% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" value="Yes" class="save btn btn-success">Save</button>
+    <button type="submit" value="Yes" class="save btn btn-success">Save</button><br>
     <a href="{% url 'expiring_user_ingredient_list' %}" <span>Cancel</span></a>
 </form><br>
 {% endblock %}
