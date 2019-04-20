@@ -25,7 +25,7 @@ def delete_user_ingredient(request, id=None):
     
     return render(request, 'ingredients/delete_user_ingredient.html', context)    
 
-def edit_user_ingredient(request,  id=None):
+def edit_user_ingredient(request, id=None):
     user_ingredient = get_object_or_404(UserIngredient, id=id)
     creator = user_ingredient.user
     if request.method == "POST" and request.user.is_authenticated and request.user == creator:
