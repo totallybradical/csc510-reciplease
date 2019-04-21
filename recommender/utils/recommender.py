@@ -17,19 +17,17 @@ def ingredients_available(recipe, ingredient_list, ask_a_neighbor):
 
     ingredients = recipe.ingredients.all()
     for ingredient in ingredients:
-        recipe_ingredients = ingredient.recipeingredient_set.all()
-        for recipe_ingredient in recipe_ingredients:
-            if recipe_ingredient.id == recipe.id:
-                if compare_ingredients(recipe_ingredient, ingredient_list):
-                    unavailable_ingredient += 1
-                if unavailable_ingredient > early_exit_threshold:
-                    return False
+        recipe_ingredient = ingredient.recipeingredient_set.all()[0]
+        if not compare_ingredients(recipe_ingredient, ingredient_list):
+            unavailable_ingredient += 1
+        if unavailable_ingredient > early_exit_threshold:
+            return False
     return True
 
 
 def compare_ingredients(recipe_ingredient, ingredient_list):
     for user_ingredient in ingredient_list:
-        if recipe_ingredient.id == user_ingredient.id:
+        if recipe_ingredient.ingredient.id == user_ingredient.ingredient.id:
             if recipe_ingredient.quantity <= user_ingredient.quantity:
-                return False
-    return True
+                return True
+    return False
