@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container" align="center">
     <h2>Search for a Recipe</h2>
-    <form method="post">
+    <form method="post" id="searchForm" user-ingredients-url=" {% url 'ajax_load_ingredients' %}" >
         {% csrf_token %}
         {% for field in form.visible_fields %}
         <div class="row">
@@ -17,6 +17,28 @@
         <button type="submit" name="lucky" class="btn btn-success" ><span class="fas fa-dice"></span> I'm Feeling Lucky</button>
         </button>
     </form>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <!-- THIS IS A WIP. It doesn't want to load properly. -->
+    <script>
+        function update_ingredients() {
+            var url= $("#searchForm").attr("user-ingredients-url");
+            var user = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'user': user,
+                },
+                success: function(data) {
+                    $("#id_ingredients").html(data);
+                }
+            });
+        }
+
+        update_ingredients();
+    </script>
 
     <div class="m-3">
         {% for field in form.visible_fields %}

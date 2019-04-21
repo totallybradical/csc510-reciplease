@@ -1,0 +1,4 @@
+<option value="">---------</option>
+{% for user_ingredient in user_ingredients %}
+<option value="{{ user_ingredient.ingredient__name }}">{{ user_ingredient.ingredient__name }}</option>
+{% endfor %}
