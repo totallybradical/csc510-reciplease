@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from recipes.models import RecipeCategory
 
 
 # Model for a Search for recipes
@@ -12,5 +11,6 @@ class SearchModel(models.Model):
     )
 
     #ingredients = models.ForeignKey('Ingredient', on_delete=models.SET_NULL, null=True)
-    mealCategory =  models.CharField(max_length=5, choices=MEAL_CATEGORY)
+    #mealCategory =  models.CharField(max_length=5, choices=MEAL_CATEGORY)
+    mealCategory = models.ForeignKey('recipes.RecipeCategory', on_delete=models.SET_NULL, null=True)
     askANeighbor = models.BooleanField()
