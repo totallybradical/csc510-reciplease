@@ -10,6 +10,8 @@
 <div class="container">
     <h2 align="center">Recipes</h2>
 
+    {% if recipes %}
+
     <div align="center">
         <input id="filter-input" placeholder="Filter" />
     </div>
@@ -51,6 +53,12 @@
             {% endfor %}
         </tbody>
     </table>
+
+    {% else %}
+
+    <div align="center" class="alert alert-info"><span class="far fa-sad-tear"></span> No known recipes</div>
+
+    {% endif %}
 </div>
 
 <script>
