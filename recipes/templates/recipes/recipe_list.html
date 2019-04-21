@@ -46,7 +46,7 @@
                 </td>
                 <td>
                     <button name="favorite" value="{{ recipe.id }}" type="button" class="btn btn-default" style="background:none">
-                        <span name="fave_icon" class="{% if recipe.id in my_faves %}fas{% else %}far{% endif %} fa-heart" style="color:#000000;"></span></a>
+                        <span name="fave_icon" class="fa-heart {% if recipe.id in my_faves %}fas{% else %}far{% endif %}" style="color:#000000;"></span></a>
                     </button>
                 </td>
             </tr>
@@ -66,7 +66,7 @@
         $('button[name=favorite]').click(function () {
             current_button = $(this);
             recipe_id = $(this).val();
-            if (current_button.hasClass("far")) {
+            if (current_button.children('span[name=fave_icon]').hasClass('far')) {
                 request_url = '/recipes/' + recipe_id + '/favorite';
                 $.ajax({
                     url: request_url,
