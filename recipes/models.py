@@ -24,6 +24,14 @@ class RecipeIngredient(models.Model):
     def __str__(self):
         return (self.recipe.name + ': ' + self.ingredient.name)
 
+# Model for a recipe to user (favorite) mapping
+class RecipeUserFavorite(models.Model):
+    recipe = models.ForeignKey('Recipe', on_delete=models.SET_NULL, null=True)
+    user =  models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return (self.recipe.name + ': ' + self.user.username)
+
 # Model for an recipe 
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
@@ -32,6 +40,7 @@ class Recipe(models.Model):
     prep_time = models.PositiveIntegerField()
     cook_time = models.PositiveIntegerField()
     servings = models.PositiveIntegerField()
+    users_fave = models.ManyToManyField(settings.AUTH_USER_MODEL, through=RecipeUserFavorite, blank=True)
 
     def __str__(self):
         return self.name

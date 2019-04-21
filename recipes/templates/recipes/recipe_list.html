@@ -23,6 +23,7 @@
                 <th scope="col">Cook Time (mins)</th>
                 <th scope="col">Yield (servings)</th>
                 <th scope="col">Details</th>
+                <th scope="col">Favorite</th>
             </tr>
         </thead>
         <tbody id="recipe-table-body">
@@ -31,17 +32,52 @@
                 <th scope="row">{{ recipe.name }}</th>
                 <td>{{ recipe.category }}</td>
                 <td>{{ recipe.prep_time }}</td>
-                <td>{{ recipe.cook_time }}</td> 
+                <td>{{ recipe.cook_time }}</td>
                 <td>{{ recipe.servings }}</td>
                 <td>
-                    <button type="button"  class="btn btn-default" style="background:none">
-                        <a href="/recipes/{{ recipe.id }}"><span class="fas fa-info-circle" style="color:#000000;"></span></a>
+                    <button type="button" class="btn btn-default" style="background:none">
+                        <a href="/recipes/{{ recipe.id }}">
+                            <span class="fas fa-info-circle" style="color:#000000;"></span>
+                        </a>
                     </button>
-        
+
+                </td>
+                <td>
+                    <button name="favorite" value="{{ recipe.id }}" type="button" class="btn btn-default" style="background:none">
+                        <span name="fave_icon" class="{% if recipe.id in my_faves %}fas{% else %}far{% endif %} fa-heart" style="color:#000000;"></span></a>
+                    </button>
                 </td>
             </tr>
-            {% endfor %} 
+            {% endfor %}
         </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('button[name=favorite]').click(function () {
+            current_button = $(this);
+            recipe_id = $(this).val();
+            if (current_button.hasClass("far")) {
+                request_url = '/recipes/' + recipe_id + '/favorite';
+                $.ajax({
+                    url: request_url,
+                    success: function (data) {
+                        current_button.children('span[name=fave_icon]').removeClass("far");
+                        current_button.children('span[name=fave_icon]').addClass("fas");
+                    }
+                })
+            } else {
+                request_url = '/recipes/' + recipe_id + '/unfavorite';
+                $.ajax({
+                    url: request_url,
+                    success: function (data) {
+                        current_button.children('span[name=fave_icon]').removeClass("fas");
+                        current_button.children('span[name=fave_icon]').addClass("far");
+                    }
+                }) 
+            }
+        });  
+    });
+</script>
 {% endblock %}

@@ -4,23 +4,6 @@
 
 
 {% block content %}
-<script>
-    $(document).ready(function () {
-        $('select[name=ingredient]').change(function () {
-            ingredient_id = $(this).val();
-            request_url = '/ingredients/' + ingredient_id + '/units';
-            $.ajax({
-                url: request_url,
-                success: function (data) {
-                    $('input[name=quantity]').attr("placeholder", data[ingredient_id]);
-                }
-            });
-            return false;
-        })
-    });
-
-</script>
-
 <h2 align="center">Add Ingredient</h2>
 <form method="POST" align="center" class="post-form">{% csrf_token %}
     {{ form.as_p }}
@@ -29,4 +12,20 @@
 <div class="container" align="center">
     <a href="{% url 'add_ingredient_type' %}" class="fas fa-plus"> Ingredient Type</a>
 </div>
+
+<script>
+        $(document).ready(function () {
+            $('select[name=ingredient]').change(function () {
+                ingredient_id = $(this).val();
+                request_url = '/ingredients/' + ingredient_id + '/units';
+                $.ajax({
+                    url: request_url,
+                    success: function (data) {
+                        $('input[name=quantity]').attr("placeholder", data[ingredient_id]);
+                    }
+                });
+                return false;
+            })
+        });
+</script>
 {% endblock %}

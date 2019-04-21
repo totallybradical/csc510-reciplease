@@ -7,5 +7,7 @@ from . import views
 urlpatterns = [
     path('', views.recipe_list, name='recipe_list'),
     path('add/', views.add_recipe, name='add_recipe'),
-    url(r'^(?P<id>\d+)/$', views.recipe_detail, name='detail'),
+    path('<int:id>/', views.recipe_detail, name='detail'),
+    path('<int:id>/favorite', views.add_favorite, name='add_favorite'),
+    path('<int:id>/unfavorite', views.delete_favorite, name='delete_favorite'),
 ]
