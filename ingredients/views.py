@@ -6,6 +6,13 @@ from django.shortcuts import redirect
 from django.db.models import Sum
 from .models import Ingredient, UserIngredient
 from .forms import IngredientForm, UserIngredientForm
+from django.http import JsonResponse
+
+def get_ingredient_units(request, id):
+    ingredient = Ingredient.objects.get(pk=id)
+    ingredient_dict = {}
+    ingredient_dict[id] = ingredient.quantity_units
+    return JsonResponse(ingredient_dict)
 
 def ingredient_list(request):
     user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').values('ingredient', 'ingredient__name', 'exp_date', 'ingredient__quantity_units').annotate(sumqty=Sum('quantity')).order_by('ingredient', '-exp_date')

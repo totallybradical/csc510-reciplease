@@ -10,6 +10,6 @@ urlpatterns = [
     path('new/', views.add_ingredient_type, name='add_ingredient_type'),
     path('expiring/', views.expiring_ingredients, name='expiring_user_ingredient_list'),
     path('<int:id>/delete/', views.delete_user_ingredient, name='delete_user_ingredient'),
-    path('<int:id>/edit/', views.edit_user_ingredient, name='edit_user_ingredient')    
-
+    path('<int:id>/edit/', views.edit_user_ingredient, name='edit_user_ingredient'),
+    path('<int:id>/units', views.get_ingredient_units, name='get_ingredient_units'),
 ]
