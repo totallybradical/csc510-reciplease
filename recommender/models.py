@@ -14,4 +14,4 @@ class SearchModel(models.Model):
     mealCategory = models.ForeignKey('recipes.RecipeCategory', on_delete=models.SET_NULL, null=True)
     askANeighbor = models.BooleanField()
     #ingredients = models.ForeignKey(UserIngredient, on_delete=models.SET_NULL, null=True, limit_choices_to={'user': views.ingredient_list})
-    ingredients = models.ForeignKey(UserIngredient, on_delete=models.SET_NULL, null=True, )
+    ingredients = models.ManyToManyField(UserIngredient )

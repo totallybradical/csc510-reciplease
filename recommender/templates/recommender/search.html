@@ -22,7 +22,7 @@
     
     <!-- THIS IS A WIP. It doesn't want to load properly. -->
     <script>
-        function update_ingredients() {
+        $(document).ready(function() {
             var url= $("#searchForm").attr("user-ingredients-url");
             var user = $(this).val();
 
@@ -35,9 +35,7 @@
                     $("#id_ingredients").html(data);
                 }
             });
-        }
-
-        update_ingredients();
+        });
     </script>
 
     <div class="m-3">
