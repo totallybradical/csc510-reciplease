@@ -15,7 +15,8 @@
         <div class="form-group ">
             <input id="filter-input" class="form-control " placeholder="Keyword Filter" />
 
-            <select class="form-control" id="sel1">
+            <select class="form-control" id="category-filter">
+                <option>(All Categories)</option>
                 {% for category in categories %}
                     <option>{{ category }}</option>
                 {% endfor %}
@@ -97,5 +98,26 @@
             }
         });  
     });
+
+
+    $(document).ready(function(){
+          $("#category-filter").on("change", function() {
+            //category from box
+            var category_box = document.getElementById("category-filter");
+            var category = category_box.value;
+            if (category!="(All Categories)") {
+                $('#recipe-table-body tr').filter(function() {
+                //category from row
+                var category_row = $(this)[0].cells[1].innerText;
+                    $(this).toggle(category_row == category);
+                });
+            } else {
+                $('#recipe-table-body tr').filter(function() {
+                    $(this).toggle(true);
+                });
+            }
+          });
+        });
+
 </script>
 {% endblock %}
