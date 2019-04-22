@@ -12,6 +12,10 @@ class SearchForm(forms.ModelForm):
             'askANeighbor': _('Ask A Neighbor'),
         }
 
+    def __init__(self, *args, **kwargs):
+        super(SearchForm, self).__init__(*args, **kwargs)
+        self.fields['ingredients'].widget.attrs['class'] = 'selectpicker'
+        self.fields['ingredients'].widget.attrs['data-actions-box'] = 'true'
 """     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['ingredients'].queryset = UserIngredient.objects.none() """

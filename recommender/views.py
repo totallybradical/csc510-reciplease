@@ -22,5 +22,5 @@ def recommend(request):
     return render(request, 'recommender/search.html', {'form': form})
 
 def load_user_ingredients(request):
-    user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').values('ingredient__name',).order_by('ingredient',)
+    user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').values('ingredient__name',).order_by('ingredient').distinct()
     return render(request, 'recommender/load_user_ingredients.html', {'user_ingredients': user_ingredients})
