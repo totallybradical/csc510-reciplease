@@ -9,7 +9,8 @@ from django.http import JsonResponse
 def recipe_list(request):
     recipes = Recipe.objects.all()
     my_faves = RecipeUserFavorite.objects.filter(user=request.user).values_list('recipe', flat=True)
-    return render(request, 'recipes/recipe_list.html', {'recipes': recipes, 'my_faves': my_faves})
+    categories = RecipeCategory.objects.all()
+    return render(request, 'recipes/recipe_list.html', {'recipes': recipes, 'my_faves': my_faves, 'categories': categories})
 
 def add_recipe(request):
     if request.method == "POST":
