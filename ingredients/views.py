@@ -15,7 +15,7 @@ def get_ingredient_units(request, id):
     return JsonResponse(ingredient_dict)
 
 def ingredient_list(request):
-    user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').values('ingredient', 'ingredient__name', 'exp_date', 'ingredient__quantity_units').annotate(sumqty=Sum('quantity')).order_by('ingredient', '-exp_date')
+    user_ingredients = UserIngredient.objects.filter(user=request.user).select_related('ingredient').values('ingredient', 'ingredient__name', 'ingredient__quantity_units').annotate(sumqty=Sum('quantity')).order_by('ingredient')
     return render(request, 'ingredients/user_ingredient_list.html', {'user_ingredients': user_ingredients})
 
 def delete_user_ingredient(request, id=None):
