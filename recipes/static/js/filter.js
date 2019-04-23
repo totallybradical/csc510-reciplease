@@ -16,20 +16,37 @@ function handleInput(event) {
     dbgPrint(`recipeTableBody: ${recipeTableBody}`);
     dbgPrint(`recipeTableBody.rows: ${recipeTableBody.rows}`);
 
-    while (recipeTableBody.firstChild) {
-        recipeTableBody.removeChild(recipeTableBody.firstChild);
+    // Category Filter
+    var category_box = document.getElementById("category-filter");
+    var category = category_box.value;
+    if (category != "(All Categories)") {
+        $('#recipe-table-body tr').filter(function () {
+            //category from row
+            var category_row = $(this)[0].cells[1].innerText;
+            $(this).toggle(category_row == category);
+        });
+    } else {
+        $('#recipe-table-body tr').filter(function () {
+            $(this).toggle(true);
+        });
     }
 
-    recipeTableBodyRows.filter((row) => {
-        return Array.from(row.cells).some((col) => {
+    // Apply Text Filter
+    $('#recipe-table-body tr').filter(function () {
+        //category from row
+        row = $(this)[0];
+        console.log(row);
+        var not_already_hidden = !($(this).css('display') == 'none');
+        var contains_filter = Array.from(row.cells).some((col) => {
             return col.textContent.toLowerCase().includes(
                 filterInput.value.toLowerCase()
             );
-        })
-    }).forEach((row) => recipeTableBody.appendChild(row));
+        });
+        $(this).toggle(contains_filter && not_already_hidden);
+    });
 }
 
-window.onload = function() {
+window.onload = function () {
     dbgPrint('filter.js loaded!');
 
     recipeTableBody = document.getElementById('recipe-table-body');
