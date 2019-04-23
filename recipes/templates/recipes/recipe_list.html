@@ -14,7 +14,7 @@
     <form class="form-inline justify-content-center">
         <div class="form-group ">
             <input id="filter-input" class="form-control " placeholder="Keyword Filter" />
-
+            &nbsp;&nbsp;
             <select class="form-control" id="category-filter">
                 <option>(All Categories)</option>
                 {% for category in categories %}
@@ -23,6 +23,7 @@
             </select>
 
             <div class="form-check-inline">
+                &nbsp;&nbsp;
                 <label class="form-check-label">
                     <input id="favorites-filter" type="checkbox" class="form-check-input" value="">Favorites Only
                 </label>
