@@ -6,7 +6,7 @@
 <div class="container" align="center">
     <h2>Search for a Recipe</h2>
 
-    <form method="post" id="searchForm" user-ingredients-url=" {% url 'ajax_load_ingredients' %}">
+    <form method="post" id="searchForm">
         {% csrf_token %}
         {% for field in form.visible_fields %}
         <div class="row">
@@ -22,24 +22,6 @@
             Lucky</button>
         </button>
     </form>
-
-    <!-- THIS IS A WIP. It doesn't want to load properly. -->
-    <script>
-        $(document).ready(function () {
-            var url = $("#searchForm").attr("user-ingredients-url");
-            var user = $(this).val();
-
-            $.ajax({
-                url: url,
-                data: {
-                    'user': user,
-                },
-                success: function (data) {
-                    $("#id_ingredients").html(data);
-                }
-            });
-        });
-    </script>
 
     <div class="m-3">
         {% for field in form.visible_fields %}

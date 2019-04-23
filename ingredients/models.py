@@ -31,4 +31,4 @@ class UserIngredient(models.Model):
     exp_date = models.DateField(default=one_month_from_today, blank=True, null=True)
     
     def __str__(self):
-        return f'{self.id} ({self.ingredient.name})'
+        return self.ingredient.name
