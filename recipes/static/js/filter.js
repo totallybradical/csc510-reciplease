@@ -10,13 +10,7 @@ function dbgPrint(msg) {
     }
 }
 
-function handleInput(event) {
-    dbgPrint('handleInput: ' + event);
-
-    dbgPrint(`filterInput.value: ${filterInput.value}`);
-    dbgPrint(`recipeTableBody: ${recipeTableBody}`);
-    dbgPrint(`recipeTableBody.rows: ${recipeTableBody.rows}`);
-
+function applyAllFilters() {
     // Reset
     $('#recipe-table-body tr').filter(function () {
         $(this).toggle(true);
@@ -57,6 +51,48 @@ function handleInput(event) {
         $(this).toggle(contains_filter && not_already_hidden);
     }); 
 }
+
+// On change of Keyword Filter box
+function handleInput(event) {
+    applyAllFilters();
+}
+
+$(document).ready(function () {
+    // On click of a Favorite <3
+    $('button[name=favorite]').click(function () {
+        current_button = $(this);
+        recipe_id = $(this).val();
+        if (current_button.children('span[name=fave_icon]').hasClass('far')) {
+            request_url = '/recipes/' + recipe_id + '/favorite';
+            $.ajax({
+                url: request_url,
+                success: function (data) {
+                    current_button.children('span[name=fave_icon]').removeClass("far");
+                    current_button.children('span[name=fave_icon]').addClass("fas");
+                }
+            })
+        } else {
+            request_url = '/recipes/' + recipe_id + '/unfavorite';
+            $.ajax({
+                url: request_url,
+                success: function (data) {
+                    current_button.children('span[name=fave_icon]').removeClass("fas");
+                    current_button.children('span[name=fave_icon]').addClass("far");
+                }
+            })
+        }
+    });
+
+    // On change of Category filter
+    $("#category-filter").on("change", function () {
+        applyAllFilters();           
+    });
+
+    // On change of Favorites Only filter
+    $('#favorites-filter').change(function () {
+        applyAllFilters(); 
+    });
+});
 
 window.onload = function () {
     dbgPrint('filter.js loaded!');
