@@ -15,8 +15,9 @@ def recommend(request):
             search_model = form.save(commit=False)
             recipes = Recipe.objects.filter(category=search_model.mealCategory)
             selected_ingredients = form.cleaned_data['ingredients']
+            ask_a_neighbor = form.cleaned_data['askANeighbor']
             feeling_luck = 'lucky' in request.POST
-            recommended_recipes = recommend_recipe(selected_ingredients, recipes, feeling_lucky=feeling_luck)
+            recommended_recipes = recommend_recipe(selected_ingredients, recipes, ask_a_neighbor=ask_a_neighbor, feeling_lucky=feeling_luck)
             my_faves = RecipeUserFavorite.objects.filter(user=request.user).values_list('recipe', flat=True)
             return render(request, 'recipes/recipe_list.html', {'recipes': recommended_recipes, 'my_faves': my_faves})
         else:
