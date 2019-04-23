@@ -107,4 +107,5 @@ window.onload = function () {
     filterInput.addEventListener("keyup", handleInput);
 
     faveFilter = document.getElementById('favorites-filter');
+    applyAllFilters();
 }
