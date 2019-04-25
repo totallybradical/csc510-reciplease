@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import redirect
 from .forms import SearchForm
-from recipes.models import Recipe, RecipeUserFavorite
+from recipes.models import Recipe, RecipeUserFavorite, RecipeCategory
 from ingredients.models import UserIngredient
 from .utils.recommender import recommend_recipe
 from django.http import JsonResponse
@@ -19,7 +19,8 @@ def recommend(request):
             feeling_luck = 'lucky' in request.POST
             recommended_recipes = recommend_recipe(selected_ingredients, recipes, ask_a_neighbor=ask_a_neighbor, feeling_lucky=feeling_luck)
             my_faves = RecipeUserFavorite.objects.filter(user=request.user).values_list('recipe', flat=True)
-            return render(request, 'recipes/recipe_list.html', {'recipes': recommended_recipes, 'my_faves': my_faves})
+            categories = RecipeCategory.objects.all()
+            return render(request, 'recipes/recipe_list.html', {'recipes': recommended_recipes, 'my_faves': my_faves, 'categories': categories})
         else:
             return JsonResponse({'formset_errors': form.errors})
 
