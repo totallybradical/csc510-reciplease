@@ -8,7 +8,7 @@ from django.conf import settings
 class SearchModel(models.Model):
     #ingredients = models.ForeignKey('Ingredient', on_delete=models.SET_NULL, null=True)
     #mealCategory =  models.CharField(max_length=5, choices=MEAL_CATEGORY)
-    mealCategory = models.ForeignKey('recipes.RecipeCategory', on_delete=models.SET_NULL, null=True)
+    #mealCategory = models.ForeignKey('recipes.RecipeCategory', on_delete=models.SET_NULL, null=True)
     askANeighbor = models.BooleanField()
     #ingredients = models.ForeignKey(UserIngredient, on_delete=models.SET_NULL, null=True, limit_choices_to={'user': views.ingredient_list})
     ingredients = models.ManyToManyField(UserIngredient )

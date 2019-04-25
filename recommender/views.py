@@ -13,7 +13,7 @@ def recommend(request):
         form = SearchForm(request.user, request.POST)
         if form.is_valid():
             search_model = form.save(commit=False)
-            recipes = Recipe.objects.filter(category=search_model.mealCategory)
+            recipes = Recipe.objects.all()
             selected_ingredients = form.cleaned_data['ingredients']
             ask_a_neighbor = form.cleaned_data['askANeighbor']
             feeling_luck = 'lucky' in request.POST
